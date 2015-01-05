@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>paomadeng</title>
+	<style type="text/css">
+	html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img {
+		margin: 0;
+		padding: 0;
+	}
+	body {
+		color: #333;
+		font: 12px/22px "宋体","Arial Narrow";
+	}
+	a:hover {
+        color: #8D0000;
+    }
+    a{
+     	text-decoration: none;
+     	list-style: none;
+     	background-color: block;
+     }
+     a:link{
+     	color: black;
+     }
+     .blk_01{
+     	position: relative;
+     	float: left;
+     }
+	.blk_tit {
+		height: 37px;
+		border-top: 2px solid black;
+		border-bottom: 1px solid #D6D6D6;
+		position: relative;
+		background: whiteSmoke;
+		width: 340px;
+	}
+	.mb_10 {
+		margin-bottom: 10px;
+	}
+	.blk_01 .blk_tit li {
+		width: 67px;
+		padding: 0;
+	}
+	.blk_tit li {
+		float: left;
+		line-height: 37px;
+		text-align: center;
+		font-size: 16px;
+		font-family: "Microsoft YaHei", "微软雅黑","黑体";
+		border-right: 1px solid #D6D6D6;
+		background: whiteSmoke;
+		padding: 0 10px;
+		list-style: none;
+	}
+	.blk_tit li.last {
+		border-right: none;
+	}
+	#picture li{
+        display: none;
+        
+    }
+    #word{
+    	position: absolute;
+    	left: 50px;
+    	top:50px;
+    }
+    #word li{
+    	list-style: none;
+    	float: left;
+    	width: 30px;
+    	text-decoration: none;
+    	display: none;
+    }
+    
+     a.left {
+		position: absolute;
+		left: 0;
+		top: 50%;
+		width: 31px;
+		height: 41px;
+		background: url(pic/l.png) no-repeat 0 0;
+		cursor: pointer;
+		margin-top: -21px;
+	}
+	a.right {
+		position: absolute;
+		right: 0;
+		top: 50%;
+		width: 31px;
+		height: 41px;
+		background: url(pic/r.png) no-repeat 0 0;
+		cursor: pointer;
+		margin-top: -21px;
+	}
+	.fbc_trigger {
+		text-align: center;
+		width: 1000px;
+		height: 22px;
+		position: absolute;
+		z-index: 2;
+		bottom: 8px;
+	}
+	#arrow a{
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<!--跑马灯-->
+	<div class="blk_01" tab-type="tab-wrap" action-type="auto_focus"onmouseover="over()"onmouseout="out()">
+		<div class="blk_tit mb_10">
+			<ol id="Blk01_Focus_Nav" >
+				<li tab-type="tab-nav" class=" " onmouseover="s(0)">
+					<a href="http://photo.sina.com.cn/" target="_blank">热点</a>
+				</li>
+	            <li tab-type="tab-nav" class=" " onmouseover="s(1)">
+	            	<a href="http://photo.sina.com.cn/" target="_blank">聚焦</a>
+	            </li>
+	            <li tab-type="tab-nav" class=" " onmouseover="s(2)">
+	            	<a href="http://photo.sina.com.cn/" target="_blank">独家</a>
+	            </li>
+	            <li tab-type="tab-nav" class=" " onmouseover="s(3)">
+	            	<a href="http://photo.sina.com.cn/" target="_blank">策划</a>
+	            </li>
+	            <li class="last " tab-type="tab-nav" onmouseover="s(4)">
+	            	<a href="http://slide.mil.news.sina.com.cn/" target="_blank">军事</a>
+	            </li>
+	        </ol>
+	    </div>
+	    <div>
+			<ul id="picture" >
+				<li> <a href="#"> <img src="pic/1000.jpg" target="_blank" alt="唯品会"></a></li>			
+				<li> <a href="#"> <img src="pic/2000.jpg" target="_blank" ></a></li>			
+				<li> <a href="#"> <img src="pic/3000.jpg" target="_blank" ></a></li>			
+				<li> <a href="#"> <img src="pic/4000.jpg" target="_blank" ></a></li>
+				<li> <a href="#"> <img src="pic/5000.jpg" target="_blank" ></a></li>
+			</ul>
+	    </div> 
+	    <div id="arrow">
+		<a href="#" class="left" onclick="move(true)" ><img src="pic/l.png"></a>
+		<a href="#" class="right" onclick="move(false)" ><img src="pic/r.png"></a>
+	</div> 
+	</div>
+	
+	
+	<script>
+
+	var nav=document.getElementById('picture').getElementsByTagName('li');
+	var wor=document.getElementById('Blk01_Focus_Nav').getElementsByTagName('li');
+	var arr=document.getElementById('arrow').getElementsByTagName('a');
+	var time;
+	var c=0;
+	var b;
+	var p;
+	var i=-1,len=nav.length;
+	var move=function(bool){
+		if(!bool){
+
+        	i++;
+        	if(i>=nav.length){i=0;}
+        	right();
+        }
+        else{
+        	i--;
+        	if(i<0){i=4;}
+        	left();
+        }
+	}
+	var timestop=function(){
+		clearInterval(time);
+		
+	}
+	var timestart=function(){
+		time=setInterval(function(){
+        move(false);
+	},3000);
+	}
+	
+	timestart();
+
+	var s=function(b){
+        
+		for (var j= 0; j < wor.length; j++) {
+		    if(j==b){
+		    	c=b;
+		    }
+
+		};
+		for (var k = 0; k < wor.length; k++) {
+			nav[k].style.display='none';
+			wor[k].style.background='whiteSmoke';
+
+		}
+            nav[c].style.display='block';
+            wor[c].style.background='white';
+            
+            i=c;
+	}
+
+    var t=function(){
+		s();
+		for (var k = 0; k < wor.length; k++) {
+			nav[k].style.display='none';
+			wor[k].style.background='whiteSmoke';
+		}
+            nav[c].style.display='block';
+            wor[c].style.background='white';
+            
+            i=c;
+            
+	}
+       var left=function(){
+         for(var m=0;m<wor.length;m++){
+            nav[m].style.display='none';
+			wor[m].style.background='whiteSmoke';
+		}
+		  
+           nav[i].style.display='block';
+           wor[i].style.background='white';
+           
+       }
+       var right=function(){
+       for(var n=0;n<wor.length;n++){
+            nav[n].style.display='none';
+			wor[n].style.background='whiteSmoke';
+		}
+        nav[i].style.display='block';
+        wor[i].style.background='white';
+    }
+       move(false);
+       var over =function(){
+          for (var p = 0; p < arr.length; p++) {
+          	arr[p].style.display='block';
+          };
+          timestop();
+       }
+       var out = function(){
+         for (var p = 0; p < arr.length; p++) {
+          	arr[p].style.display='none';
+          };
+       	timestart();
+       }
+	</script>
+	
+</body>
+</html>
